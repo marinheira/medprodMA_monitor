@@ -1,9 +1,7 @@
 <!doctype html>
-
 <html lang="ru">
 
 <head>
-
 <meta charset="utf-8">
 
 <meta
@@ -11,70 +9,48 @@
   content="width=device-width, initial-scale=1"
 >
 
-<title>
-  Выгрузка Росздравнадзора
-</title>
+<title>Выгрузка Росздравнадзора</title>
 
 <style>
 
 :root {
-  font-family:
-    "Segoe UI",
-    Arial,
-    sans-serif;
-
+  font-family: "Segoe UI", Arial, sans-serif;
   color: #172033;
   background: #f4f6f9;
 }
 
-
 * {
   box-sizing: border-box;
 }
-
 
 body {
   margin: 0;
   padding: 28px;
 }
 
-
 .card {
   max-width: 960px;
   margin: auto;
-
   background: white;
-
   border-radius: 18px;
-
   padding: 28px;
-
-  box-shadow:
-    0 10px 35px
-    rgba(27, 43, 75, 0.09);
+  box-shadow: 0 10px 35px rgba(27, 43, 75, 0.09);
 }
-
 
 h1 {
   margin: 0 0 8px;
-
   font-size: 26px;
 }
 
-
 .sub {
   color: #667085;
-
   margin-bottom: 24px;
 }
 
-
 label {
   display: block;
-
   font-size: 14px;
   font-weight: 600;
-
   margin-bottom: 7px;
 }
 
@@ -85,37 +61,22 @@ label {
 
 .date-section {
   display: flex;
-
   gap: 14px;
-
   flex-wrap: wrap;
-
   margin-bottom: 22px;
 }
-
 
 .date-field {
   width: 175px;
 }
 
-
 input[type="date"] {
   width: 175px;
-
   padding: 9px 10px;
-
-  border:
-    1px solid #cfd6e4;
-
+  border: 1px solid #cfd6e4;
   border-radius: 9px;
-
   background: white;
-
-  font:
-    14px
-    "Segoe UI",
-    Arial,
-    sans-serif;
+  font: 14px "Segoe UI", Arial, sans-serif;
 }
 
 
@@ -127,66 +88,42 @@ input[type="date"] {
   margin-top: 4px;
 }
 
-
 .name-row {
   display: flex;
-
   gap: 8px;
-
   align-items: center;
-
   max-width: 650px;
-
   margin-bottom: 8px;
 }
 
-
 .name-row input {
   flex: 1;
-
   min-width: 220px;
-
   padding: 11px 12px;
-
-  border:
-    1px solid #cfd6e4;
-
+  border: 1px solid #cfd6e4;
   border-radius: 9px;
-
   font-size: 15px;
 }
 
-
 button {
   font-family: inherit;
-
   border: 0;
-
   border-radius: 9px;
-
   cursor: pointer;
-
   font-weight: 700;
 }
 
-
 .add {
   padding: 9px 14px;
-
   background: #e7f0fa;
-
   color: #0067b8;
 }
-
 
 .remove {
   width: 40px;
   height: 40px;
-
   background: #fbe9e7;
-
   color: #b42318;
-
   font-size: 19px;
 }
 
@@ -197,55 +134,34 @@ button {
 
 .actions {
   display: flex;
-
   gap: 10px;
-
   align-items: center;
-
   margin-top: 20px;
-
   flex-wrap: wrap;
 }
 
-
 .run {
   background: #0067b8;
-
   color: white;
-
   padding: 12px 24px;
-
   font-size: 15px;
 }
-
 
 .run:hover {
   background: #005a9e;
 }
 
-
 .run:disabled {
   opacity: 0.55;
-
   cursor: not-allowed;
 }
 
-
 .copy {
   display: none;
-
   background: #e7f0fa;
-
   color: #0067b8;
-
   padding: 12px 18px;
-
   font-size: 14px;
-}
-
-
-.copy:hover {
-  background: #d8e8f7;
 }
 
 
@@ -255,55 +171,86 @@ button {
 
 .progress {
   height: 12px;
-
   background: #e7ebf2;
-
   border-radius: 99px;
-
   overflow: hidden;
-
   margin-top: 22px;
 }
 
-
 .bar {
   height: 100%;
-
   width: 0;
-
   background: #20a464;
 }
 
-
 .bar.running {
   width: 70%;
-
-  animation:
-    pulse
-    1.2s
-    ease-in-out
-    infinite alternate;
+  animation: pulse 1.2s ease-in-out infinite alternate;
 }
-
 
 @keyframes pulse {
-
-  from {
-    opacity: 0.35;
-  }
-
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0.35; }
+  to { opacity: 1; }
 }
 
 
+/* ==========================
+   STATUS
+========================== */
+
 .status {
-  margin: 8px 0;
-
+  margin: 10px 0;
   color: #475467;
-
   font-size: 14px;
+}
+
+.ok {
+  color: #067647;
+  font-weight: 600;
+}
+
+.warning {
+  color: #b54708;
+  font-weight: 600;
+}
+
+.error {
+  color: #b42318;
+  font-weight: 600;
+}
+
+
+/* ==========================
+   SEARCH RESULTS
+========================== */
+
+.search-results {
+  display: none;
+  margin: 14px 0;
+  padding: 14px 16px;
+  background: #f8fafc;
+  border: 1px solid #e3e8ef;
+  border-radius: 10px;
+}
+
+.search-results-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #475467;
+  margin-bottom: 8px;
+}
+
+.search-result-row {
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.search-result-ok {
+  color: #067647;
+}
+
+.search-result-empty {
+  color: #b54708;
 }
 
 
@@ -312,63 +259,26 @@ button {
 ========================== */
 
 .log-header {
-  display: flex;
-
-  justify-content: space-between;
-
-  align-items: center;
-
   margin-top: 8px;
-
   margin-bottom: 6px;
 }
 
-
 .log-title {
   font-size: 13px;
-
   font-weight: 600;
-
   color: #475467;
 }
 
-
 .log {
-  height: 340px;
-
+  height: 300px;
   overflow: auto;
-
   background: #0f172a;
-
   color: #d6e4ff;
-
   border-radius: 12px;
-
   padding: 15px;
-
   white-space: pre-wrap;
-
   word-break: break-word;
-
-  font:
-    13px/1.5
-    Consolas,
-    Menlo,
-    monospace;
-}
-
-
-.error {
-  color: #b42318;
-
-  font-weight: 600;
-}
-
-
-.ok {
-  color: #067647;
-
-  font-weight: 600;
+  font: 13px/1.5 Consolas, Menlo, monospace;
 }
 
 
@@ -376,29 +286,23 @@ button {
    MOBILE
 ========================== */
 
-@media (
-  max-width: 620px
-) {
+@media (max-width: 620px) {
 
   body {
     padding: 12px;
   }
 
-
   .card {
     padding: 18px;
   }
-
 
   .date-field {
     width: 100%;
   }
 
-
   input[type="date"] {
     width: 100%;
   }
-
 
   .name-row {
     max-width: 100%;
@@ -407,20 +311,16 @@ button {
 }
 
 </style>
-
 </head>
 
 
 <body>
 
-
 <main class="card">
-
 
 <h1>
   Сведения о ЛС, вводимых в гражданский оборот
 </h1>
-
 
 <div class="sub">
   Тип ЛС: ЛП.
@@ -430,93 +330,82 @@ button {
 
 <section class="date-section">
 
+  <div class="date-field">
 
-<div class="date-field">
+    <label for="date-from">
+      Дата начала
+    </label>
 
-<label for="date-from">
-  Дата начала
-</label>
+    <input
+      id="date-from"
+      type="date"
+    >
 
-<input
-  id="date-from"
-  type="date"
->
-
-</div>
+  </div>
 
 
-<div class="date-field">
+  <div class="date-field">
 
-<label for="date-to">
-  Дата окончания
-</label>
+    <label for="date-to">
+      Дата окончания
+    </label>
 
-<input
-  id="date-to"
-  type="date"
->
+    <input
+      id="date-to"
+      type="date"
+    >
 
-</div>
-
+  </div>
 
 </section>
 
 
 <section class="names-section">
 
+  <label>
+    Торговые наименования
+  </label>
 
-<label>
-  Торговые наименования
-</label>
+  <div id="name-rows"></div>
 
-
-<div id="name-rows">
-</div>
-
-
-<button
-  id="add-name"
-  class="add"
-  type="button"
->
-  + Добавить наименование
-</button>
-
+  <button
+    id="add-name"
+    class="add"
+    type="button"
+  >
+    + Добавить наименование
+  </button>
 
 </section>
 
 
 <div class="actions">
 
+  <button
+    id="run"
+    class="run"
+    type="button"
+  >
+    Выгрузить
+  </button>
 
-<button
-  id="run"
-  class="run"
-  type="button"
->
-  Выгрузить
-</button>
-
-
-<button
-  id="copy-log"
-  class="copy"
-  type="button"
->
-  Копировать лог
-</button>
-
+  <button
+    id="copy-log"
+    class="copy"
+    type="button"
+  >
+    Копировать лог
+  </button>
 
 </div>
 
 
 <div class="progress">
 
-<div
-  id="progress-bar"
-  class="bar"
->
-</div>
+  <div
+    id="progress-bar"
+    class="bar"
+  ></div>
 
 </div>
 
@@ -529,11 +418,26 @@ button {
 </div>
 
 
+<div
+  id="search-results"
+  class="search-results"
+>
+
+  <div class="search-results-title">
+    Результат поиска
+  </div>
+
+  <div id="search-results-content">
+  </div>
+
+</div>
+
+
 <div class="log-header">
 
-<span class="log-title">
-  Журнал выполнения
-</span>
+  <span class="log-title">
+    Журнал выполнения
+  </span>
 
 </div>
 
@@ -543,100 +447,70 @@ button {
   class="log"
 ></pre>
 
-
 </main>
 
 
 <script>
 
 const nameRows =
-  document.getElementById(
-    "name-rows"
-  );
-
+  document.getElementById("name-rows");
 
 const addButton =
-  document.getElementById(
-    "add-name"
-  );
-
+  document.getElementById("add-name");
 
 const runButton =
-  document.getElementById(
-    "run"
-  );
-
+  document.getElementById("run");
 
 const copyButton =
-  document.getElementById(
-    "copy-log"
-  );
-
+  document.getElementById("copy-log");
 
 const progressBar =
-  document.getElementById(
-    "progress-bar"
-  );
-
+  document.getElementById("progress-bar");
 
 const statusElement =
-  document.getElementById(
-    "status"
-  );
-
+  document.getElementById("status");
 
 const logElement =
-  document.getElementById(
-    "log"
-  );
-
+  document.getElementById("log");
 
 const dateFrom =
-  document.getElementById(
-    "date-from"
-  );
-
+  document.getElementById("date-from");
 
 const dateTo =
-  document.getElementById(
-    "date-to"
-  );
+  document.getElementById("date-to");
+
+const searchResults =
+  document.getElementById("search-results");
+
+const searchResultsContent =
+  document.getElementById("search-results-content");
 
 
 /* ==========================
    LOG
 ========================== */
 
-function addLog(
-  message
-) {
+function addLog(message) {
 
   const time =
-    new Date()
-      .toLocaleTimeString();
-
+    new Date().toLocaleTimeString();
 
   logElement.textContent +=
     `[UI ${time}] ${message}\n`;
 
-
   logElement.scrollTop =
     logElement.scrollHeight;
-
 
   copyButton.style.display =
     "inline-block";
 }
 
 
-function appendServerLog(
-  text
-) {
+function appendServerLog(text) {
 
   if (!text) {
     return;
   }
-
 
   logElement.textContent +=
     "\n\n" +
@@ -645,10 +519,8 @@ function appendServerLog(
     "\n" +
     "======== END SERVER DIAGNOSTICS ========\n";
 
-
   logElement.scrollTop =
     logElement.scrollHeight;
-
 
   copyButton.style.display =
     "inline-block";
@@ -656,7 +528,7 @@ function appendServerLog(
 
 
 /* ==========================
-   COPY
+   COPY LOG
 ========================== */
 
 copyButton.addEventListener(
@@ -666,11 +538,9 @@ copyButton.addEventListener(
     const text =
       logElement.textContent;
 
-
     if (!text) {
       return;
     }
-
 
     try {
 
@@ -678,83 +548,49 @@ copyButton.addEventListener(
         text
       );
 
-
-      const oldText =
-        copyButton.textContent;
-
-
-      copyButton.textContent =
-        "Скопировано ✓";
-
-
-      setTimeout(
-        () => {
-
-          copyButton.textContent =
-            oldText;
-
-        },
-
-        1500
-      );
-
-
     } catch {
-
-      /*
-        Fallback для браузеров,
-        блокирующих Clipboard API.
-      */
 
       const textarea =
         document.createElement(
           "textarea"
         );
 
-
       textarea.value =
         text;
-
 
       textarea.style.position =
         "fixed";
 
-
       textarea.style.left =
         "-9999px";
-
 
       document.body.appendChild(
         textarea
       );
 
-
       textarea.select();
-
 
       document.execCommand(
         "copy"
       );
 
-
       textarea.remove();
-
-
-      copyButton.textContent =
-        "Скопировано ✓";
-
-
-      setTimeout(
-        () => {
-
-          copyButton.textContent =
-            "Копировать лог";
-
-        },
-
-        1500
-      );
     }
+
+
+    copyButton.textContent =
+      "Скопировано ✓";
+
+
+    setTimeout(
+      () => {
+
+        copyButton.textContent =
+          "Копировать лог";
+
+      },
+      1500
+    );
 
   }
 );
@@ -764,9 +600,7 @@ copyButton.addEventListener(
    DATES
 ========================== */
 
-function localDateString(
-  date
-) {
+function localDateString(date) {
 
   const adjusted =
     new Date(
@@ -774,7 +608,6 @@ function localDateString(
       date.getTimezoneOffset() *
       60000
     );
-
 
   return adjusted
     .toISOString()
@@ -785,26 +618,18 @@ function localDateString(
 const today =
   new Date();
 
-
 const weekAgo =
   new Date(today);
-
 
 weekAgo.setDate(
   today.getDate() - 7
 );
 
-
 dateTo.value =
-  localDateString(
-    today
-  );
-
+  localDateString(today);
 
 dateFrom.value =
-  localDateString(
-    weekAgo
-  );
+  localDateString(weekAgo);
 
 
 /* ==========================
@@ -816,46 +641,33 @@ function addNameRow(
 ) {
 
   const row =
-    document.createElement(
-      "div"
-    );
-
+    document.createElement("div");
 
   row.className =
     "name-row";
 
 
   const input =
-    document.createElement(
-      "input"
-    );
-
+    document.createElement("input");
 
   input.type =
     "text";
 
-
   input.placeholder =
     "Например, Форсига";
-
 
   input.value =
     initialValue;
 
 
   const removeButton =
-    document.createElement(
-      "button"
-    );
-
+    document.createElement("button");
 
   removeButton.type =
     "button";
 
-
   removeButton.className =
     "remove";
-
 
   removeButton.textContent =
     "×";
@@ -866,17 +678,14 @@ function addNameRow(
     () => {
 
       if (
-        nameRows.children.length >
-        1
+        nameRows.children.length > 1
       ) {
 
         row.remove();
 
       } else {
 
-        input.value =
-          "";
-
+        input.value = "";
         input.focus();
       }
 
@@ -884,20 +693,10 @@ function addNameRow(
   );
 
 
-  row.appendChild(
-    input
-  );
+  row.appendChild(input);
+  row.appendChild(removeButton);
 
-
-  row.appendChild(
-    removeButton
-  );
-
-
-  nameRows.appendChild(
-    row
-  );
-
+  nameRows.appendChild(row);
 
   input.focus();
 }
@@ -908,11 +707,87 @@ addNameRow();
 
 addButton.addEventListener(
   "click",
-  () => {
-
-    addNameRow();
-  }
+  () => addNameRow()
 );
+
+
+/* ==========================
+   SEARCH RESULTS
+========================== */
+
+function showSearchResults(results) {
+
+  searchResultsContent.textContent =
+    "";
+
+  if (
+    !Array.isArray(results) ||
+    results.length === 0
+  ) {
+
+    searchResults.style.display =
+      "none";
+
+    return;
+  }
+
+
+  searchResults.style.display =
+    "block";
+
+
+  for (const result of results) {
+
+    const row =
+      document.createElement("div");
+
+    row.className =
+      "search-result-row";
+
+
+    if (result.count > 0) {
+
+      row.classList.add(
+        "search-result-ok"
+      );
+
+      row.textContent =
+        `✓ ${result.trade_name}: ` +
+        `${result.count} записей`;
+
+    } else {
+
+      row.classList.add(
+        "search-result-empty"
+      );
+
+      row.textContent =
+        `⚠ ${result.trade_name}: 0 записей`;
+    }
+
+
+    searchResultsContent.appendChild(
+      row
+    );
+
+
+    if (result.count > 0) {
+
+      addLog(
+        `✓ ${result.trade_name}: ` +
+        `${result.count} записей`
+      );
+
+    } else {
+
+      addLog(
+        `⚠ ${result.trade_name}: 0 записей`
+      );
+    }
+
+  }
+
+}
 
 
 /* ==========================
@@ -933,16 +808,15 @@ runButton.addEventListener(
           input =>
             input.value.trim()
         )
-        .filter(
-          Boolean
-        );
+        .filter(Boolean);
 
 
     if (!names.length) {
 
       statusElement.innerHTML =
         '<span class="error">' +
-        "Добавьте минимум одно торговое наименование" +
+        "Добавьте минимум одно " +
+        "торговое наименование" +
         "</span>";
 
       return;
@@ -970,7 +844,8 @@ runButton.addEventListener(
 
       statusElement.innerHTML =
         '<span class="error">' +
-        "Дата начала позже даты окончания" +
+        "Дата начала позже " +
+        "даты окончания" +
         "</span>";
 
       return;
@@ -980,23 +855,24 @@ runButton.addEventListener(
     logElement.textContent =
       "";
 
+    searchResults.style.display =
+      "none";
+
+    searchResultsContent.textContent =
+      "";
 
     copyButton.style.display =
       "none";
 
-
     runButton.disabled =
       true;
-
 
     progressBar.classList.add(
       "running"
     );
 
-
     progressBar.style.width =
       "";
-
 
     statusElement.textContent =
       "Формирование выгрузки...";
@@ -1006,12 +882,10 @@ runButton.addEventListener(
       "Запуск выгрузки"
     );
 
-
     addLog(
       "Наименования: " +
       names.join(" + ")
     );
-
 
     addLog(
       "Период: " +
@@ -1046,20 +920,18 @@ runButton.addEventListener(
     };
 
 
-    addLog(
-      "POST /api/export"
-    );
-
-
     try {
+
+      addLog(
+        "POST /api/export"
+      );
+
 
       const response =
         await fetch(
           "/api/export",
           {
-
-            method:
-              "POST",
+            method: "POST",
 
             headers: {
               "Content-Type":
@@ -1080,161 +952,258 @@ runButton.addEventListener(
       );
 
 
-      if (!response.ok) {
+      /*
+        --------------------------------
+        УСПЕШНЫЙ XLSX
+        --------------------------------
 
-        /*
-          ВАЖНО:
-          error response читается только один раз.
-        */
+        export.js возвращает результаты
+        поиска в заголовке X-Search-Results.
+      */
 
-        const responseText =
-          await response.text();
+      if (response.ok) {
+
+        const encodedResults =
+          response.headers.get(
+            "X-Search-Results"
+          );
+
+
+        if (encodedResults) {
+
+          try {
+
+            const results =
+              JSON.parse(
+                decodeURIComponent(
+                  encodedResults
+                )
+              );
+
+
+            showSearchResults(
+              results
+            );
+
+          } catch (error) {
+
+            addLog(
+              "Не удалось разобрать " +
+              "X-Search-Results: " +
+              error.message
+            );
+          }
+
+        }
+
+
+        const blob =
+          await response.blob();
 
 
         addLog(
-          "Получен ответ с ошибкой"
+          "Размер XLSX: " +
+          blob.size +
+          " bytes"
         );
 
 
-        let errorData;
-
-
-        try {
-
-          errorData =
-            JSON.parse(
-              responseText
-            );
-
-        } catch {
-
-          errorData = {
-            error:
-              responseText
-          };
-        }
-
-
-        if (
-          errorData.invocation_id
-        ) {
-
-          addLog(
-            "Invocation ID: " +
-            errorData.invocation_id
+        const headerFilename =
+          response.headers.get(
+            "X-Filename"
           );
-        }
 
 
-        if (
-          errorData.diagnostic_log
-        ) {
+        const filename =
+          headerFilename
+            ? decodeURIComponent(
+                headerFilename
+              )
+            : "Росздравнадзор.xlsx";
 
-          appendServerLog(
-            errorData.diagnostic_log
+
+        const url =
+          URL.createObjectURL(
+            blob
           );
-        }
 
 
-        throw new Error(
-          errorData.error ||
-          (
-            "HTTP " +
-            response.status
-          )
+        const anchor =
+          document.createElement(
+            "a"
+          );
+
+
+        anchor.href =
+          url;
+
+        anchor.download =
+          filename;
+
+
+        document.body.appendChild(
+          anchor
+        );
+
+
+        anchor.click();
+
+        anchor.remove();
+
+
+        setTimeout(
+          () =>
+            URL.revokeObjectURL(
+              url
+            ),
+          5000
+        );
+
+
+        progressBar.classList.remove(
+          "running"
+        );
+
+
+        progressBar.style.width =
+          "100%";
+
+
+        statusElement.innerHTML =
+          '<span class="ok">' +
+          "Готово" +
+          "</span>";
+
+
+        addLog(
+          "Файл передан " +
+          "на скачивание: " +
+          filename
+        );
+
+
+        return;
+      }
+
+
+      /*
+        --------------------------------
+        JSON RESPONSE
+        --------------------------------
+
+        Сюда попадают:
+
+        - 404: по всем ТН 0 записей
+        - 500: техническая ошибка
+      */
+
+      const responseText =
+        await response.text();
+
+
+      let errorData;
+
+
+      try {
+
+        errorData =
+          JSON.parse(
+            responseText
+          );
+
+      } catch {
+
+        errorData = {
+          error:
+            responseText
+        };
+      }
+
+
+      /*
+        Результаты по каждому ТН
+        показываем даже если XLSX
+        не создан.
+      */
+
+      if (
+        Array.isArray(
+          errorData.search_results
+        )
+      ) {
+
+        showSearchResults(
+          errorData.search_results
         );
       }
 
 
-      addLog(
-        "Получен успешный ответ"
-      );
+      /*
+        Нормальный бизнес-кейс:
+        по всем ТН найдено 0.
+      */
+
+      if (
+        response.status === 404 &&
+        errorData.no_results === true
+      ) {
+
+        progressBar.classList.remove(
+          "running"
+        );
+
+        progressBar.style.width =
+          "100%";
 
 
-      const blob =
-        await response.blob();
+        statusElement.innerHTML =
+          '<span class="warning">' +
+          "По заданным параметрам " +
+          "сведения не найдены." +
+          "</span>";
 
 
-      addLog(
-        "Размер XLSX: " +
-        blob.size +
-        " bytes"
-      );
-
-
-      const headerFilename =
-        response.headers.get(
-          "X-Filename"
+        addLog(
+          "По заданным параметрам " +
+          "сведения не найдены."
         );
 
 
-      const filename =
-        headerFilename
-          ? decodeURIComponent(
-              headerFilename
-            )
-          : "Росздравнадзор.xlsx";
+        return;
+      }
 
 
-      const url =
-        URL.createObjectURL(
-          blob
+      /*
+        Диагностика технической ошибки.
+      */
+
+      if (
+        errorData.invocation_id
+      ) {
+
+        addLog(
+          "Invocation ID: " +
+          errorData.invocation_id
         );
+      }
 
 
-      const anchor =
-        document.createElement(
-          "a"
+      if (
+        errorData.diagnostic_log
+      ) {
+
+        appendServerLog(
+          errorData.diagnostic_log
         );
+      }
 
 
-      anchor.href =
-        url;
-
-
-      anchor.download =
-        filename;
-
-
-      document.body.appendChild(
-        anchor
-      );
-
-
-      anchor.click();
-
-
-      anchor.remove();
-
-
-      setTimeout(
-        () =>
-          URL.revokeObjectURL(
-            url
-          ),
-
-        5000
-      );
-
-
-      progressBar.classList.remove(
-        "running"
-      );
-
-
-      progressBar.style.width =
-        "100%";
-
-
-      statusElement.innerHTML =
-        '<span class="ok">' +
-        "Готово" +
-        "</span>";
-
-
-      addLog(
-        "Файл передан на скачивание: " +
-        filename
+      throw new Error(
+        errorData.error ||
+        (
+          "HTTP " +
+          response.status
+        )
       );
 
 
@@ -1272,7 +1241,5 @@ runButton.addEventListener(
 
 </script>
 
-
 </body>
-
 </html>
