@@ -1,0 +1,8 @@
+{
+  "name": "roszdravnadzor-turnover-export",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {"dev": "netlify dev", "build": "node build.js"},
+  "dependencies": {"exceljs": "4.4.0"},
+  "devDependencies": {"netlify-cli": "19.6.1"}
+}
