@@ -25,20 +25,62 @@ const COLUMN_NAMES = [
   "Письма, приказы об изъятии ЛС (номер, дата)"
 ];
 
+let diagnosticLog = [];
 
-function log(message, data = undefined) {
-  const stamp = new Date().toISOString();
 
-  if (data === undefined) {
-    console.log(`[${stamp}] ${message}`);
-  } else {
-    console.log(
-      `[${stamp}] ${message}`,
-      JSON.stringify(data, null, 2)
-    );
-  }
+function resetDiagnosticLog() {
+  diagnosticLog = [];
 }
 
+
+function log(message, data = undefined) {
+
+  const stamp =
+    new Date().toISOString();
+
+
+  let line =
+    `[${stamp}] ${message}`;
+
+
+  if (data !== undefined) {
+
+    let serialized;
+
+    try {
+      serialized =
+        JSON.stringify(
+          data,
+          null,
+          2
+        );
+    } catch {
+      serialized =
+        String(data);
+    }
+
+    line +=
+      "\n" +
+      serialized;
+  }
+
+
+  diagnosticLog.push(
+    line
+  );
+
+
+  console.log(
+    line
+  );
+}
+
+
+function getDiagnosticLog() {
+  return diagnosticLog.join(
+    "\n"
+  );
+}
 
 function truncate(value, maxLength = 1500) {
   value = String(value ?? "");
@@ -1012,6 +1054,8 @@ async function createWorkbook(
 exports.handler =
   async function handler(event) {
 
+    resetDiagnosticLog();
+
     const invocationId =
       Math.random()
         .toString(36)
@@ -1254,45 +1298,51 @@ exports.handler =
 
 
     } catch (error) {
-
+    
       log(
         "FUNCTION ERROR",
         {
           invocation_id:
             invocationId,
-
+    
           name:
             error.name,
-
+    
           message:
             error.message,
-
+    
           stack:
             error.stack
         }
       );
-
-
+    
+    
       return {
+    
         statusCode: 500,
-
+    
         headers: {
+    
           "Content-Type":
             "application/json; charset=utf-8",
-
+    
           "Cache-Control":
             "no-store"
         },
-
+    
         body:
           JSON.stringify({
+    
             error:
               error.message ||
               String(error),
-
+    
             invocation_id:
-              invocationId
+              invocationId,
+    
+            diagnostic_log:
+              getDiagnosticLog()
           })
       };
     }
-  };
+};
