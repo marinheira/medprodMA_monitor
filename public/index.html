@@ -24,7 +24,6 @@
     sans-serif;
 
   color: #172033;
-
   background: #f4f6f9;
 }
 
@@ -42,10 +41,9 @@ body {
 
 .card {
   max-width: 960px;
-
   margin: auto;
 
-  background: #ffffff;
+  background: white;
 
   border-radius: 18px;
 
@@ -58,8 +56,7 @@ body {
 
 
 h1 {
-  margin:
-    0 0 8px;
+  margin: 0 0 8px;
 
   font-size: 26px;
 }
@@ -72,16 +69,24 @@ h1 {
 }
 
 
-/* -----------------------------
+label {
+  display: block;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  margin-bottom: 7px;
+}
+
+
+/* ==========================
    ДАТЫ
------------------------------- */
+========================== */
 
 .date-section {
   display: flex;
 
-  align-items: end;
-
-  gap: 16px;
+  gap: 14px;
 
   flex-wrap: wrap;
 
@@ -90,45 +95,33 @@ h1 {
 
 
 .date-field {
-  width: 190px;
-}
-
-
-label {
-  display: block;
-
-  font-weight: 600;
-
-  font-size: 14px;
-
-  margin-bottom: 7px;
-}
-
-
-input {
-  font-family: inherit;
-
-  font-size: 15px;
+  width: 175px;
 }
 
 
 input[type="date"] {
-  width: 190px;
+  width: 175px;
 
-  padding: 10px 11px;
+  padding: 9px 10px;
 
   border:
     1px solid #cfd6e4;
 
   border-radius: 9px;
 
-  background: #ffffff;
+  background: white;
+
+  font:
+    14px
+    "Segoe UI",
+    Arial,
+    sans-serif;
 }
 
 
-/* -----------------------------
+/* ==========================
    ТОРГОВЫЕ НАИМЕНОВАНИЯ
------------------------------- */
+========================== */
 
 .names-section {
   margin-top: 4px;
@@ -142,9 +135,9 @@ input[type="date"] {
 
   align-items: center;
 
-  margin-bottom: 8px;
-
   max-width: 650px;
+
+  margin-bottom: 8px;
 }
 
 
@@ -159,6 +152,8 @@ input[type="date"] {
     1px solid #cfd6e4;
 
   border-radius: 9px;
+
+  font-size: 15px;
 }
 
 
@@ -176,23 +171,17 @@ button {
 
 
 .add {
-  padding:
-    9px 14px;
+  padding: 9px 14px;
 
   background: #e7f0fa;
 
   color: #0067b8;
-
-  margin-top: 2px;
 }
 
 
 .remove {
   width: 40px;
-
   height: 40px;
-
-  flex: 0 0 40px;
 
   background: #fbe9e7;
 
@@ -202,15 +191,29 @@ button {
 }
 
 
-.run {
+/* ==========================
+   ACTIONS
+========================== */
+
+.actions {
+  display: flex;
+
+  gap: 10px;
+
+  align-items: center;
+
   margin-top: 20px;
 
+  flex-wrap: wrap;
+}
+
+
+.run {
   background: #0067b8;
 
-  color: #ffffff;
+  color: white;
 
-  padding:
-    12px 24px;
+  padding: 12px 24px;
 
   font-size: 15px;
 }
@@ -228,9 +231,27 @@ button {
 }
 
 
-/* -----------------------------
-   ПРОГРЕСС
------------------------------- */
+.copy {
+  display: none;
+
+  background: #e7f0fa;
+
+  color: #0067b8;
+
+  padding: 12px 18px;
+
+  font-size: 14px;
+}
+
+
+.copy:hover {
+  background: #d8e8f7;
+}
+
+
+/* ==========================
+   PROGRESS
+========================== */
 
 .progress {
   height: 12px;
@@ -241,7 +262,7 @@ button {
 
   overflow: hidden;
 
-  margin-top: 24px;
+  margin-top: 22px;
 }
 
 
@@ -251,23 +272,15 @@ button {
   width: 0;
 
   background: #20a464;
-
-  transition:
-    width 0.25s;
 }
 
-
-/*
-  На Netlify Function мы не можем получать
-  реальный прогресс внутри одного запроса,
-  поэтому показываем indeterminate progress.
-*/
 
 .bar.running {
   width: 70%;
 
   animation:
-    pulse 1.2s
+    pulse
+    1.2s
     ease-in-out
     infinite alternate;
 }
@@ -286,8 +299,7 @@ button {
 
 
 .status {
-  margin:
-    8px 0;
+  margin: 8px 0;
 
   color: #475467;
 
@@ -295,12 +307,34 @@ button {
 }
 
 
-/* -----------------------------
+/* ==========================
    LOG
------------------------------- */
+========================== */
+
+.log-header {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  margin-top: 8px;
+
+  margin-bottom: 6px;
+}
+
+
+.log-title {
+  font-size: 13px;
+
+  font-weight: 600;
+
+  color: #475467;
+}
+
 
 .log {
-  height: 240px;
+  height: 340px;
 
   overflow: auto;
 
@@ -317,7 +351,7 @@ button {
   word-break: break-word;
 
   font:
-    13px/1.55
+    13px/1.5
     Consolas,
     Menlo,
     monospace;
@@ -338,9 +372,9 @@ button {
 }
 
 
-/* -----------------------------
+/* ==========================
    MOBILE
------------------------------- */
+========================== */
 
 @media (
   max-width: 620px
@@ -353,11 +387,6 @@ button {
 
   .card {
     padding: 18px;
-  }
-
-
-  .date-section {
-    gap: 10px;
   }
 
 
@@ -401,56 +430,63 @@ button {
 
 <section class="date-section">
 
-  <div class="date-field">
 
-    <label for="date-from">
-      Дата начала
-    </label>
+<div class="date-field">
 
-    <input
-      id="date-from"
-      type="date"
-    >
+<label for="date-from">
+  Дата начала
+</label>
 
-  </div>
+<input
+  id="date-from"
+  type="date"
+>
+
+</div>
 
 
-  <div class="date-field">
+<div class="date-field">
 
-    <label for="date-to">
-      Дата окончания
-    </label>
+<label for="date-to">
+  Дата окончания
+</label>
 
-    <input
-      id="date-to"
-      type="date"
-    >
+<input
+  id="date-to"
+  type="date"
+>
 
-  </div>
+</div>
+
 
 </section>
 
 
 <section class="names-section">
 
-  <label>
-    Торговые наименования
-  </label>
+
+<label>
+  Торговые наименования
+</label>
 
 
-  <div id="name-rows">
-  </div>
+<div id="name-rows">
+</div>
 
 
-  <button
-    id="add-name"
-    class="add"
-    type="button"
-  >
-    + Добавить наименование
-  </button>
+<button
+  id="add-name"
+  class="add"
+  type="button"
+>
+  + Добавить наименование
+</button>
+
 
 </section>
+
+
+<div class="actions">
 
 
 <button
@@ -462,13 +498,25 @@ button {
 </button>
 
 
+<button
+  id="copy-log"
+  class="copy"
+  type="button"
+>
+  Копировать лог
+</button>
+
+
+</div>
+
+
 <div class="progress">
 
-  <div
-    id="progress-bar"
-    class="bar"
-  >
-  </div>
+<div
+  id="progress-bar"
+  class="bar"
+>
+</div>
 
 </div>
 
@@ -478,6 +526,15 @@ button {
   class="status"
 >
   Готово к работе
+</div>
+
+
+<div class="log-header">
+
+<span class="log-title">
+  Журнал выполнения
+</span>
+
 </div>
 
 
@@ -507,6 +564,12 @@ const addButton =
 const runButton =
   document.getElementById(
     "run"
+  );
+
+
+const copyButton =
+  document.getElementById(
+    "copy-log"
   );
 
 
@@ -540,7 +603,13 @@ const dateTo =
   );
 
 
-function log(message) {
+/* ==========================
+   LOG
+========================== */
+
+function addLog(
+  message
+) {
 
   const time =
     new Date()
@@ -548,17 +617,158 @@ function log(message) {
 
 
   logElement.textContent +=
-    `[${time}] ${message}\n`;
+    `[UI ${time}] ${message}\n`;
 
 
   logElement.scrollTop =
     logElement.scrollHeight;
+
+
+  copyButton.style.display =
+    "inline-block";
 }
 
 
-function formatDate(date) {
+function appendServerLog(
+  text
+) {
 
-  const local =
+  if (!text) {
+    return;
+  }
+
+
+  logElement.textContent +=
+    "\n\n" +
+    "======== SERVER DIAGNOSTICS ========\n" +
+    text +
+    "\n" +
+    "======== END SERVER DIAGNOSTICS ========\n";
+
+
+  logElement.scrollTop =
+    logElement.scrollHeight;
+
+
+  copyButton.style.display =
+    "inline-block";
+}
+
+
+/* ==========================
+   COPY
+========================== */
+
+copyButton.addEventListener(
+  "click",
+  async () => {
+
+    const text =
+      logElement.textContent;
+
+
+    if (!text) {
+      return;
+    }
+
+
+    try {
+
+      await navigator.clipboard.writeText(
+        text
+      );
+
+
+      const oldText =
+        copyButton.textContent;
+
+
+      copyButton.textContent =
+        "Скопировано ✓";
+
+
+      setTimeout(
+        () => {
+
+          copyButton.textContent =
+            oldText;
+
+        },
+
+        1500
+      );
+
+
+    } catch {
+
+      /*
+        Fallback для браузеров,
+        блокирующих Clipboard API.
+      */
+
+      const textarea =
+        document.createElement(
+          "textarea"
+        );
+
+
+      textarea.value =
+        text;
+
+
+      textarea.style.position =
+        "fixed";
+
+
+      textarea.style.left =
+        "-9999px";
+
+
+      document.body.appendChild(
+        textarea
+      );
+
+
+      textarea.select();
+
+
+      document.execCommand(
+        "copy"
+      );
+
+
+      textarea.remove();
+
+
+      copyButton.textContent =
+        "Скопировано ✓";
+
+
+      setTimeout(
+        () => {
+
+          copyButton.textContent =
+            "Копировать лог";
+
+        },
+
+        1500
+      );
+    }
+
+  }
+);
+
+
+/* ==========================
+   DATES
+========================== */
+
+function localDateString(
+  date
+) {
+
+  const adjusted =
     new Date(
       date.getTime() -
       date.getTimezoneOffset() *
@@ -566,15 +776,11 @@ function formatDate(date) {
     );
 
 
-  return local
+  return adjusted
     .toISOString()
     .slice(0, 10);
 }
 
-
-/* -----------------------------
-   ДАТЫ ПО УМОЛЧАНИЮ
------------------------------- */
 
 const today =
   new Date();
@@ -590,16 +796,20 @@ weekAgo.setDate(
 
 
 dateTo.value =
-  formatDate(today);
+  localDateString(
+    today
+  );
 
 
 dateFrom.value =
-  formatDate(weekAgo);
+  localDateString(
+    weekAgo
+  );
 
 
-/* -----------------------------
-   ТОРГОВЫЕ НАИМЕНОВАНИЯ
------------------------------- */
+/* ==========================
+   TRADE NAMES
+========================== */
 
 function addNameRow(
   initialValue = ""
@@ -651,10 +861,6 @@ function addNameRow(
     "×";
 
 
-  removeButton.title =
-    "Удалить";
-
-
   removeButton.addEventListener(
     "click",
     () => {
@@ -668,9 +874,12 @@ function addNameRow(
 
       } else {
 
-        input.value = "";
+        input.value =
+          "";
+
         input.focus();
       }
+
     }
   );
 
@@ -706,9 +915,9 @@ addButton.addEventListener(
 );
 
 
-/* -----------------------------
-   ВЫГРУЗКА
------------------------------- */
+/* ==========================
+   EXPORT
+========================== */
 
 runButton.addEventListener(
   "click",
@@ -733,8 +942,7 @@ runButton.addEventListener(
 
       statusElement.innerHTML =
         '<span class="error">' +
-        "Добавьте минимум одно " +
-        "торговое наименование" +
+        "Добавьте минимум одно торговое наименование" +
         "</span>";
 
       return;
@@ -762,12 +970,19 @@ runButton.addEventListener(
 
       statusElement.innerHTML =
         '<span class="error">' +
-        "Дата начала позже " +
-        "даты окончания" +
+        "Дата начала позже даты окончания" +
         "</span>";
 
       return;
     }
+
+
+    logElement.textContent =
+      "";
+
+
+    copyButton.style.display =
+      "none";
 
 
     runButton.disabled =
@@ -783,26 +998,22 @@ runButton.addEventListener(
       "";
 
 
-    logElement.textContent =
-      "";
-
-
     statusElement.textContent =
       "Формирование выгрузки...";
 
 
-    log(
-      "Запуск"
+    addLog(
+      "Запуск выгрузки"
     );
 
 
-    log(
+    addLog(
       "Наименования: " +
       names.join(" + ")
     );
 
 
-    log(
+    addLog(
       "Период: " +
       dateFrom.value +
       " — " +
@@ -810,34 +1021,43 @@ runButton.addEventListener(
     );
 
 
-    log(
-      "Отправка запроса " +
-      "в Netlify Function..."
+    const convertDate =
+      value =>
+        value
+          .split("-")
+          .reverse()
+          .join(".");
+
+
+    const requestBody = {
+
+      trade_names:
+        names,
+
+      date_from:
+        convertDate(
+          dateFrom.value
+        ),
+
+      date_to:
+        convertDate(
+          dateTo.value
+        )
+    };
+
+
+    addLog(
+      "POST /api/export"
     );
 
 
     try {
 
-      /*
-        Росздравнадзор ожидает даты:
-        DD.MM.YYYY
-
-        HTML date возвращает:
-        YYYY-MM-DD
-      */
-
-      const convertDate =
-        (value) =>
-          value
-            .split("-")
-            .reverse()
-            .join(".");
-
-
       const response =
         await fetch(
           "/api/export",
           {
+
             method:
               "POST",
 
@@ -847,36 +1067,34 @@ runButton.addEventListener(
             },
 
             body:
-              JSON.stringify({
-                trade_names:
-                  names,
-
-                date_from:
-                  convertDate(
-                    dateFrom.value
-                  ),
-
-                date_to:
-                  convertDate(
-                    dateTo.value
-                  )
-              })
+              JSON.stringify(
+                requestBody
+              )
           }
         );
 
 
-      log(
-        "Netlify Function: HTTP " +
+      addLog(
+        "HTTP " +
         response.status
       );
 
 
-      /*
-        Ошибочный ответ читаем как JSON,
-        чтобы получить invocation_id.
-      */
-
       if (!response.ok) {
+
+        /*
+          ВАЖНО:
+          error response читается только один раз.
+        */
+
+        const responseText =
+          await response.text();
+
+
+        addLog(
+          "Получен ответ с ошибкой"
+        );
+
 
         let errorData;
 
@@ -884,13 +1102,15 @@ runButton.addEventListener(
         try {
 
           errorData =
-            await response.json();
+            JSON.parse(
+              responseText
+            );
 
         } catch {
 
           errorData = {
             error:
-              await response.text()
+              responseText
           };
         }
 
@@ -899,9 +1119,19 @@ runButton.addEventListener(
           errorData.invocation_id
         ) {
 
-          log(
+          addLog(
             "Invocation ID: " +
             errorData.invocation_id
+          );
+        }
+
+
+        if (
+          errorData.diagnostic_log
+        ) {
+
+          appendServerLog(
+            errorData.diagnostic_log
           );
         }
 
@@ -916,14 +1146,20 @@ runButton.addEventListener(
       }
 
 
-      log(
-        "Получен XLSX, " +
-        "подготовка скачивания..."
+      addLog(
+        "Получен успешный ответ"
       );
 
 
       const blob =
         await response.blob();
+
+
+      addLog(
+        "Размер XLSX: " +
+        blob.size +
+        " bytes"
+      );
 
 
       const headerFilename =
@@ -996,13 +1232,8 @@ runButton.addEventListener(
         "</span>";
 
 
-      log(
-        "Файл сформирован."
-      );
-
-
-      log(
-        "На скачивание передано: " +
+      addLog(
+        "Файл передан на скачивание: " +
         filename
       );
 
@@ -1024,7 +1255,7 @@ runButton.addEventListener(
         "</span>";
 
 
-      log(
+      addLog(
         "ОШИБКА: " +
         error.message
       );
