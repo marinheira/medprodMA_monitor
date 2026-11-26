@@ -542,13 +542,17 @@ async function loadTradeName(
 }
 
 function safeFilename(names) {
-  const base = names
-    .join("_")
+
+  if (names.length > 1) {
+    return "ТН_Росздравнадзор_ЛП.xlsx";
+  }
+
+  const name = names[0]
     .replace(/[\\/:*?"<>|]+/g, "_")
     .replace(/\s+/g, " ")
-    .slice(0, 120) || "Результат";
+    .trim();
 
-  return `${base}_Росздравнадзор_ЛП.xlsx`;
+  return `${name}_Росздравнадзор_ЛП.xlsx`;
 }
 
 async function createWorkbook(rows) {
