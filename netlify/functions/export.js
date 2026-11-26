@@ -102,30 +102,181 @@ async function requestPage(args){
   if(json.message) throw new Error(`Росздравнадзор: ${json.message}`);
   return json;
 }
-async function loadTradeName(tradeName,dateFrom,dateTo){
-  log("Starting trade name",{trade_name:tradeName});
-  const cookieHeader=await openService();
-  let all=[],start=0,draw=1,total=null,previousTotal=0;
-  while(true){
-    const json=await requestPage({tradeName,dateFrom,dateTo,start,draw,previousTotal,cookieHeader});
-    if(total===null){
-      total=Number(json.recordsFiltered ?? json.recordsTotal ?? 0);
-      previousTotal=Number(json.recordsTotal ?? total);
-      log("Search initialized",{trade_name:tradeName,records_filtered:json.recordsFiltered,records_total:json.recordsTotal,expected:total});
+async function loadTradeName(
+  tradeName,
+  dateFrom,
+  dateTo,
+  cookieHeader
+) {
+
+  log(
+    "Starting trade name",
+    {
+      trade_name:
+        tradeName
     }
-    const batch=json.data || [];
-    log("Batch received",{trade_name:tradeName,start,batch:batch.length,accumulated:all.length+batch.length,expected:total});
-    if(!batch.length) break;
-    all.push(...batch); start+=batch.length; draw+=1;
-    if(all.length>=total) break;
+  );
+
+
+  let all = [];
+
+  let start = 0;
+  let draw = 1;
+
+  let total = null;
+  let previousTotal = 0;
+
+
+  while (true) {
+
+    const json =
+      await requestPage({
+        tradeName,
+        dateFrom,
+        dateTo,
+        start,
+        draw,
+        previousTotal,
+        cookieHeader
+      });
+
+
+    if (total === null) {
+
+      total =
+        Number(
+          json.recordsFiltered ??
+          json.recordsTotal ??
+          0
+        );
+
+
+      previousTotal =
+        Number(
+          json.recordsTotal ??
+          total
+        );
+
+
+      log(
+        "Search initialized",
+        {
+          trade_name:
+            tradeName,
+
+          records_filtered:
+            json.recordsFiltered,
+
+          records_total:
+            json.recordsTotal,
+
+          expected:
+            total
+        }
+      );
+    }
+
+
+    const batch =
+      json.data || [];
+
+
+    log(
+      "Batch received",
+      {
+        trade_name:
+          tradeName,
+
+        start,
+
+        batch:
+          batch.length,
+
+        accumulated:
+          all.length +
+          batch.length,
+
+        expected:
+          total
+      }
+    );
+
+
+    if (!batch.length) {
+      break;
+    }
+
+
+    all.push(
+      ...batch
+    );
+
+
+    start +=
+      batch.length;
+
+    draw += 1;
+
+
+    if (
+      all.length >= total
+    ) {
+      break;
+    }
   }
-  if(all.length!==total) throw new Error(`${tradeName}: загружено ${all.length} из ${total}`);
-  log("Trade name completed",{trade_name:tradeName,records:all.length});
-  return { tradeName, count: all.length, rows: all.map(r=>[tradeName,...Array.from({length:13},(_,i)=>extractCell(r,i+1))]) };
-}
-function safeFilename(names){
-  const base=names.join("_").replace(/[\\/:*?"<>|]+/g,"_").replace(/\s+/g," ").slice(0,120) || "Результат";
-  return `${base}_Росздравнадзор_ЛП.xlsx`;
+
+
+  if (
+    all.length !== total
+  ) {
+
+    throw new Error(
+      `${tradeName}: загружено ` +
+      `${all.length} из ${total}`
+    );
+  }
+
+
+  log(
+    "Trade name completed",
+    {
+      trade_name:
+        tradeName,
+
+      records:
+        all.length
+    }
+  );
+
+
+  return {
+
+    tradeName,
+
+    count:
+      all.length,
+
+    rows:
+      all.map(
+        record => [
+
+          tradeName,
+
+          ...Array.from(
+            {
+              length: 13
+            },
+
+            (_, index) =>
+              extractCell(
+                record,
+                index + 1
+              )
+          )
+
+        ]
+      )
+  };
 }
 async function createWorkbook(rows){
   const wb=new ExcelJS.Workbook(); const ws=wb.addWorksheet("Результаты",{views:[{state:"frozen",ySplit:1}]});
@@ -147,12 +298,88 @@ exports.handler=async function(event){
     if(!body.date_from||!body.date_to) throw new Error("Укажите обе даты");
     log("Request accepted",{invocation_id:invocationId,trade_names:names,date_from:body.date_from,date_to:body.date_to});
 
-    const searchResults=[]; let rows=[];
-    for(const name of names){
-      const result=await loadTradeName(name,body.date_from,body.date_to);
-      searchResults.push({trade_name:result.tradeName,count:result.count});
-      if(result.count>0) rows.push(...result.rows);
+    const searchResults = [];
+
+let rows = [];
+
+
+/*
+  Одна web-session Росздравнадзора
+  на весь пользовательский запрос.
+*/
+
+log(
+  "Opening shared Roszdravnadzor session"
+);
+
+
+const cookieHeader =
+  await openService();
+
+
+log(
+  "Shared Roszdravnadzor session ready",
+  {
+    trade_names:
+      names.length
+  }
+);
+
+
+/*
+  Каждый ТН ищем последовательно,
+  но в одной и той же сессии.
+*/
+
+for (const name of names) {
+
+  const result =
+    await loadTradeName(
+      name,
+      body.date_from,
+      body.date_to,
+      cookieHeader
+    );
+
+
+  searchResults.push({
+
+    trade_name:
+      result.tradeName,
+
+    count:
+      result.count
+
+  });
+
+
+  log(
+    "Trade name search result",
+    {
+      trade_name:
+        result.tradeName,
+
+      count:
+        result.count
     }
+  );
+
+
+  /*
+    В Excel добавляем только ТН,
+    для которых действительно
+    найдены записи.
+  */
+
+  if (
+    result.count > 0
+  ) {
+
+    rows.push(
+      ...result.rows
+    );
+  }
+}
     log("Search summary",{search_results:searchResults,total_rows:rows.length});
 
     if(rows.length===0){
