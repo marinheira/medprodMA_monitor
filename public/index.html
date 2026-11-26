@@ -119,6 +119,11 @@ button {
   color: #0067b8;
 }
 
+.add:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
 .remove {
   width: 40px;
   height: 40px;
@@ -363,7 +368,7 @@ button {
 <section class="names-section">
 
   <label>
-    Торговые наименования
+    Торговые наименования (не более трёх)
   </label>
 
   <div id="name-rows"></div>
@@ -452,6 +457,8 @@ button {
 
 <script>
 
+const MAX_TRADE_NAMES = 3;
+  
 const nameRows =
   document.getElementById("name-rows");
 
@@ -676,19 +683,21 @@ function addNameRow(
   removeButton.addEventListener(
     "click",
     () => {
-
+  
       if (
         nameRows.children.length > 1
       ) {
-
+  
         row.remove();
-
+  
+        updateAddButtonState();
+  
       } else {
-
+  
         input.value = "";
         input.focus();
       }
-
+  
     }
   );
 
@@ -703,11 +712,50 @@ function addNameRow(
 
 
 addNameRow();
+updateAddButtonState();
+
+
+function updateAddButtonState() {
+
+  const count =
+    nameRows.children.length;
+
+  const limitReached =
+    count >= MAX_TRADE_NAMES;
+
+  addButton.disabled =
+    limitReached;
+
+  if (limitReached) {
+
+    addButton.textContent =
+      "Достигнут лимит: 3 наименования";
+
+  } else {
+
+    addButton.textContent =
+      "+ Добавить наименование";
+  }
+}
 
 
 addButton.addEventListener(
   "click",
-  () => addNameRow()
+  () => {
+
+    if (
+      nameRows.children.length >=
+      MAX_TRADE_NAMES
+    ) {
+
+      return;
+    }
+
+
+    addNameRow();
+
+    updateAddButtonState();
+  }
 );
 
 
